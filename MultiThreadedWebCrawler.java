@@ -19,7 +19,7 @@ public class MultiThreadedWebCrawler {
     private static ExecutorService executor; // Thread pool
 
     public static void main(String[] args) {
-        String url = "https://en.wikipedia.org/";
+        String url = "https://jsoup.org/download";
 
         // Initialize the thread pool
         executor = Executors.newFixedThreadPool(NUM_THREADS);
@@ -31,7 +31,7 @@ public class MultiThreadedWebCrawler {
         executor.shutdown();
     }
 
-    private static void crawl(int depth, String url) {
+    private static synchronized void crawl(int depth, String url) {
         if (depth > MAX_DEPTH) {
             return; // Stop crawling if reached max depth
         }
@@ -44,6 +44,9 @@ public class MultiThreadedWebCrawler {
         // Mark the URL as visited
         visitedUrls.add(url);
 
+        // Log the crawling activity
+        System.out.println(Thread.currentThread().getName() + " is crawling " + url);
+
         // Submit crawling task to the thread pool
         executor.submit(() -> {
             try {
@@ -52,7 +55,7 @@ public class MultiThreadedWebCrawler {
                 Document doc = con.get();
 
                 // Print link and title of the document
-                System.out.println("Link: " + url);
+                System.out.println(Thread.currentThread().getName() + " found link: " + url);
                 System.out.println("Title: " + doc.title());
 
                 // Extract links from the document and recursively crawl each link
@@ -66,4 +69,3 @@ public class MultiThreadedWebCrawler {
         });
     }
 }
-
