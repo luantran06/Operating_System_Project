@@ -29,9 +29,11 @@ public class MultiThreadedPersistentDFSWebCrawler {
 
         // Start crawling from the initial URLs
         String[] startingUrls = {
-            "https://jsoup.org/download",
             "https://www.yahoo.com",
-            "https://www.google.com"
+            "https://www.google.com",
+            "https://www.facebook.com",
+            "https://www.instagram.com",
+            "https://cbnc.com"
         };
         for (String url : startingUrls) {
             crawl(url, 1);
