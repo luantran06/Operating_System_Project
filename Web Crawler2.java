@@ -67,9 +67,9 @@ public class Webcrawler {
 
     public static void main(String[] args) {
         String[] startingUrls = {
-            "http://naver.com",
-            "http://google.com",
-            "http://youtube.com",
+            "https://www.netflix.com/browse",
+            "https://www.google.com/",
+            "https://www.youtube.com/",
             "https://www.op.gg/"
         };
         int maxDepth = 5;
